@@ -19,10 +19,10 @@ jobs:
         with:
           files: "README.md"
 
-      - name: Validate OpenAPI definition
-        uses: char0n/swagger-editor-validate@v1
-        with:
-          definition-file: examples/openapi-2-0.yaml
+      # - name: Validate OpenAPI definition
+      #   uses: char0n/swagger-editor-validate@v1
+      #   with:
+      #     definition-file: examples/openapi-2-0.yaml
 
   security:
     runs-on: ubuntu-latest
@@ -41,20 +41,20 @@ jobs:
          
 
 
-  build-push-deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone repository
-        uses: actions/checkout@v2
+  # build-push-deploy:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Clone repository
+  #       uses: actions/checkout@v2
 
 
-      - uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: install 
+  #     - uses: borales/actions-yarn@v3.0.0
+  #       with:
+  #         cmd: install 
 
 
-      - uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: build
+  #     - uses: borales/actions-yarn@v3.0.0
+  #       with:
+  #         cmd: build
 
