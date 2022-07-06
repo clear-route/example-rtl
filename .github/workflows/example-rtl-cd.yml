@@ -1,4 +1,4 @@
-name: developer-hub-cd
+name: example-rtl-cd
 
 on:
   push:
@@ -12,17 +12,16 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v2
       
-    
       - name: Check file existence
         id: check_files
         uses: andstor/file-existence-action@v1
         with:
           files: "README.md"
 
-      # - name: Validate OpenAPI definition
-      #   uses: char0n/swagger-editor-validate@v1
-      #   with:
-      #     definition-file: examples/openapi-2-0.yaml
+      - name: Validate OpenAPI definition
+        uses: char0n/swagger-editor-validate@v1
+        with:
+          definition-file: examples/openapi-2-0.yaml
 
   security:
     runs-on: ubuntu-latest
@@ -39,22 +38,4 @@ jobs:
           pip install gittyleaks
           gittyleaks
          
-
-
-  # build-push-deploy:
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Clone repository
-  #       uses: actions/checkout@v2
-
-
-  #     - uses: borales/actions-yarn@v3.0.0
-  #       with:
-  #         cmd: install 
-
-
-  #     - uses: borales/actions-yarn@v3.0.0
-  #       with:
-  #         cmd: build
 
