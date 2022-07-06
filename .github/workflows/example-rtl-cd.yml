@@ -15,6 +15,7 @@ jobs:
       - name: Check file existence
         id: check_files
         uses: andstor/file-existence-action@v1
+        allow_failure: false
         with:
           files: "README.md"
 
@@ -22,6 +23,24 @@ jobs:
         uses: char0n/swagger-editor-validate@v1
         with:
           definition-file: open-api-spec.yml
+
+  performance: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Run local k6 test
+        uses: grafana/k6-action@v0.2.0
+        with:
+          filename: kSixLoadTest.js
+      
+      - name: Store performance test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: k6-summary-report
+          path: summary.json
+
 
   security:
     runs-on: ubuntu-latest
