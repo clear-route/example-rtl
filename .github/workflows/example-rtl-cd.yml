@@ -21,21 +21,23 @@ jobs:
       - name: Validate OpenAPI definition
         uses: char0n/swagger-editor-validate@v1
         with:
-          definition-file: examples/openapi-2-0.yaml
+          definition-file: open-api-spec.yml
 
   security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/maven@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
+   
       - name: Scan for committed credentials
         id: scan-for-creds
         run: |
           pip install gittyleaks
           gittyleaks
          
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+
 
