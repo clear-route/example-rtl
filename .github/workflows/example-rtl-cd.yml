@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, reopened]
       
 jobs:
   test:
@@ -17,14 +19,38 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "README.md"
-          allow_failure: false
+          // weird that this is set to true - there is a git issue logged
+          // https://github.com/andstor/file-existence-action/issues/7
+          allow_failure: true
 
       - name: Validate OpenAPI definition
         uses: char0n/swagger-editor-validate@v1
         with:
           definition-file: open-api-spec.yml
+      
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          
+      - name: Test with Maven
+        run: mvn test
+
+
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        id: build-image
+        run: |
+          docker build -t demo/bankapp .
 
   performance: 
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
