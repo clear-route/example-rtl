@@ -49,7 +49,7 @@ jobs:
         run: |
           docker build -t demo/bankapp .
 
-  performance: 
+  test-performance: 
     needs: build
     runs-on: ubuntu-latest
     steps:
