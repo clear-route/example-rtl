@@ -19,8 +19,8 @@ jobs:
         uses: andstor/file-existence-action@v1
         with:
           files: "README.md"
-          // weird that this is set to true - there is a git issue logged
-          // https://github.com/andstor/file-existence-action/issues/7
+          # weird that this is set to true - there is a git issue logged
+          # https://github.com/andstor/file-existence-action/issues/7
           allow_failure: true
 
       - name: Validate OpenAPI definition
@@ -33,7 +33,7 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          
+
       - name: Test with Maven
         run: mvn test
 
