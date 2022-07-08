@@ -29,8 +29,7 @@ paths:
                 example: password1234
               tcno:
                 type: string
-                example: 12512561125
-            
+                example: 12512561125          
       responses: 
         '200':
           description: 'create a new user'
