@@ -60,7 +60,7 @@ jobs:
           npm run test-open-api
 
   test-performance: 
-    needs: build
+    needs: build-and-test-open-api-spec
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
