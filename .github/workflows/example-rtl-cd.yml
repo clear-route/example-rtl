@@ -54,7 +54,7 @@ jobs:
           docker run -d --expose 8080 -p 8080:8080 demo/bankapp
 
       - name: Test Open Api Spec
-        id: run-image
+        id: test-image
         run: |
           npm run test-open-api
 
