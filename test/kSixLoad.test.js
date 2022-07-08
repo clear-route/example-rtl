@@ -9,7 +9,7 @@ export const options = {
   },
 };
 
-export default async function () {
-  await http.post('http://localhost:8080/api/user/create');
+export default function () {
+  http.post('http://localhost:8080/api/user/create');
   sleep(1.5);
 }
