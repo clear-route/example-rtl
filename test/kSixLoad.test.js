@@ -5,12 +5,11 @@ export const options = {
   duration: '1m',
   vus: 50,
   thresholds: {
-    http_req_failed: ['rate<0.01'], // http errors should be less than 1%
-    http_req_duration: ['p(95)<500'], // 95 percent of response times must be below 500ms
+    http_req_duration: ['p(95)<1000'], // 95 percent of response times must be below 500ms
   },
 };
 
-export default function () {
-  const res = http.get('https://test.k6.io');
-  sleep(1);
+export default async function () {
+  await http.post('http://localhost:8080/api/user/create');
+  sleep(1.5);
 }

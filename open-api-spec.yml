@@ -9,7 +9,6 @@ servers:
     description: local
   
 paths:
-
   /api/user/create:
     post:
       summary: Create a new user
@@ -18,7 +17,6 @@ paths:
           in: body
           required: true
           schema:
-            # Body schema with atomic property examples
             type: object
             properties:
               username:
