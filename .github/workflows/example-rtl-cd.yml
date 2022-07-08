@@ -37,7 +37,7 @@ jobs:
       - name: Test with Maven
         run: mvn test
 
-  build: 
+  build-and-test-open-api-spec: 
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -56,6 +56,7 @@ jobs:
       - name: Test Open Api Spec
         id: test-image
         run: |
+          npm i
           npm run test-open-api
 
   test-performance: 
