@@ -5,21 +5,43 @@ info:
   description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
   version: 0.1.9
 servers:
-  - url: http://api.example.com/v1
-    description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
+  - url: http://localhost:8080
+    description: local
+  
 paths:
-  /users:
-    get:
-      summary: Returns a list of users.
-      description: Optional extended description in CommonMark or HTML.
-      responses:
-        '200':    
-          description: A JSON array of user names
+
+  /api/user/create:
+    post:
+      summary: Create a new user
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            # Body schema with atomic property examples
+            type: object
+            properties:
+              username:
+                type: string
+                example: test@user.com
+              password:
+                type: string
+                example: password1234
+              tcno:
+                type: string
+                example: 12512561125
+            
+      responses: 
+        '200':
+          description: 'create a new user'
           content:
             application/json:
-              schema: 
-                type: array
-                items: 
-                  type: string
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    description: Username
+                  tcno:
+                    type: string
+                    description: ID
