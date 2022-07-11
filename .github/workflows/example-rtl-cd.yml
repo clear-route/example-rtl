@@ -33,7 +33,7 @@ jobs:
         run: |
           echo "tests passed"
 
-  test-open-api-spec-and-performance: 
+  test-open-api-spec: 
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
@@ -55,6 +55,23 @@ jobs:
           npm i
           npm run test-open-api
       
+
+  test-performance: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        id: build-image
+        run: |
+          docker build -t demo/bankapp .
+
+      - name: Run Docker Image
+        id: run-image
+        run: |
+          docker run -d --expose 8080 -p 8080:8080 demo/bankapp
+      
       - name: Run local k6 test
         uses: grafana/k6-action@v0.2.0
         with:
@@ -65,6 +82,7 @@ jobs:
         with:
           name: k6-summary-report
           path: summary.json
+          
 
   security:
     runs-on: ubuntu-latest
