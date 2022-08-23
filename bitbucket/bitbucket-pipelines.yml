@@ -1,0 +1,9 @@
+pipelines:
+  pull-requests:
+    '**': 
+      - step:
+        name: unit-test
+        runs-on: ubuntu-latest
+        script:
+          - echo "test that we are able to run on the specified operating system"
+          
