@@ -66,6 +66,7 @@ jobs:
           name: k6-summary-report
           path: summary.json
 
+
   security:
     runs-on: ubuntu-latest
     steps:
